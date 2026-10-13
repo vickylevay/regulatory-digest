@@ -4,8 +4,10 @@ Instructions for the regulation-watch routine. The routine reports which AI regu
 
 Related files:
 - `sources.md`: the allowed sources, their URLs and the minimum fetches per source.
+- `context/index.md`: index of the product and control cards. Read it before anything else.
+- `context/product/` and `context/controls/`: the cards the agent reads before writing.
 - `.claude/skills/regulation-watch/`: entry point that runs the steps in order.
-- `.claude/skills/rw-gather/`, `rw-filter-window/`, `rw-assess/`, `rw-render-verify/`: one skill per step.
+- `.claude/skills/rw-load-context/`, `rw-gather/`, `rw-filter-window/`, `rw-assess/`, `rw-render-verify/`: one skill per step.
 
 ## Parameters
 
@@ -22,6 +24,16 @@ FloQast sells Close Management, month-end close software for accounting teams, t
 3. **Detect**: flags unusual transactions for review.
 
 None of them makes decisions about individuals. If the user states a change to these facts, use theirs for that run.
+
+## Context before writing
+
+Before gathering, read `context/index.md`, the product card and `sources.md`. Before assessing each item, read the control cards the index says match it. The `rw-load-context` skill does this. Rules:
+
+- Cards are internal context, not regulatory sources. Regulatory claims still need an official page fetched in this run.
+- The control cards are SAMPLE DATA, not FloQast's controls. Call them "sample control AI-0x" and never say FloQast operates, passes or fails one.
+- Lines marked **confirm** in a card are unknown, not "no". If an item depends on one, list it in the gaps as "Unconfirmed: ...".
+- If a card conflicts with the product facts above, use the product facts and list the conflict in the gaps.
+- Name the card behind a feature or control judgment in the row (for example "product card", "sample control AI-02").
 
 ## Rules that never bend
 
@@ -40,10 +52,11 @@ None of them makes decisions about individuals. If the user states a change to t
 Run the steps in order (the `regulation-watch` skill does this):
 
 1. Fix the window and date.
-2. Gather per source (`rw-gather`).
-3. Filter to the window (`rw-filter-window`).
-4. Apply to features and rate impact (`rw-assess`).
-5. Check for nulls, render and verify (`rw-render-verify`).
+2. Load context: index, product card, sources note (`rw-load-context`).
+3. Gather per source (`rw-gather`).
+4. Filter to the window (`rw-filter-window`).
+5. Read matching control cards, apply to features and rate impact (`rw-load-context`, then `rw-assess`).
+6. Check for nulls, render and verify (`rw-render-verify`).
 
 ## Output
 

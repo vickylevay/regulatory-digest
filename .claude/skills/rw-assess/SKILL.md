@@ -5,11 +5,13 @@ description: Steps 4 and 5 of regulation watch. Map each in-window item to FloQa
 
 # Apply to features and rate impact
 
-Inputs: kept items, product facts in `CLAUDE.md`.
+Inputs: kept items, product facts in `CLAUDE.md`, the product card, and the control cards `rw-load-context` matched to each item.
 
 ## Apply to features
 
 For each item decide which of AI Assistant, AI Variance Analysis and Detect it touches, and why, using only the product facts and the item's own scope text. If the scope text was not read (only a landing page or Q&A read, or a PDF only grepped), state exactly what was and was not read. Phrase conclusions as "my reading". Where scope depends on a legal question, recommend counsel.
+
+Use the product card to name which feature the item touches and which "confirm" lines it depends on. Use the matched control cards to say which sample control's scope the item reaches and what to check first, including any gap the card names. Put the card names in the "Feature touched and why" cell (for example "product card; sample control AI-02"); the table columns do not change. Cards never raise or lower a rating on their own: the rubric below applies to the item's own official text and the product facts. A "confirm" line that decides scope makes the item Medium if a decision or deadline is ahead, and goes in the gaps.
 
 For each item also capture: what it requires, key dates (as stated on the page), and the first thing FloQast should check.
 

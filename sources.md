@@ -31,9 +31,15 @@ For every source: record the URL fetched, the page's own published, modified or 
 - Domain: `nist.gov`.
 - Minimum fetches: the AI Risk Management Framework page and any in-window publication it lists.
 
+## Context files are not sources
+
+`context/` holds internal product and control cards. They may be named in a row as the basis for "feature touched and why" or "first thing to check". They are never cited as the source of a regulatory claim, and they are not one of the five allowed sources.
+
 ## Known gaps to list every run
 
 - UK coverage (no allowed source).
 - Any primary text not opened (EUR-Lex act, guideline PDF, statute, draft rule).
 - Owners left TBC.
+- Any "confirm" or known-gap item from `context/index.md` that an item depends on.
+- Control cards are sample data: control mappings are unconfirmed until Legal confirms.
 - Any page that failed to load.
